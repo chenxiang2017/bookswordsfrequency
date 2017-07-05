@@ -1,0 +1,112 @@
+{% extends "layout.html" %} {% block chart %}
+<div class="row col-md-offset-1">
+    <div id="xyj" class="chart col-md-6 ">
+    </div>
+    <div id="shz" class="chart col-md-6 col-md-offset-1">
+    </div>
+</div>
+<div class="row col-md-offset-1">
+    <div id="hlm" class="chart col-md-6">
+    </div>
+    <div id="sgyy" class="chart col-md-6 col-md-offset-1">
+    </div>
+</div>
+<script type="text/javascript">
+// 基于准备好的dom，初始化echarts实例
+var charts = new Array();
+var booknames = new Array('xyj', 'shz', 'hlm', 'sgyy');
+var bookNameTitles = new Array('西游记', '水浒传', '红楼梦', '三国演义');
+for (var index = 0; index < booknames.length; index++) {
+    charts[index] = echarts.init(document.getElementById(booknames[index]));
+}
+
+// 指定图表的配置项和数据
+var option = {
+    title: {
+        text: '词频统计'
+    },
+    tooltip: {},
+    legend: {
+        data: ['词频']
+    },
+    xAxis: {
+        data: []
+    },
+    yAxis: {},
+    series: [{
+        name: '词频',
+        type: 'bar',
+        data: []
+    }]
+};
+
+// 使用刚指定的配置项和数据显示图表。
+for (var index = 0; index < booknames.length; index++) {
+    charts[index].setOption(option);
+    charts[index].showLoading();
+}
+
+$.get('/getSortedWords/' + booknames[0]).done(function(data) {
+    charts[0].hideLoading();
+    charts[0].setOption({
+        title: {
+            text: bookNameTitles[0]
+        },
+        xAxis: {
+            data: data.topwords
+        },
+        series: [{
+            name: '词频',
+            data: data.topwordsnum
+        }]
+    });
+});
+$.get('/getSortedWords/' + booknames[1]).done(function(data) {
+    charts[1].hideLoading();
+    charts[1].setOption({
+        title: {
+            text: bookNameTitles[1]
+        },
+        xAxis: {
+            data: data.topwords
+        },
+        series: [{
+            name: '词频',
+            data: data.topwordsnum
+        }]
+    });
+});
+$.get('/getSortedWords/' + booknames[2]).done(function(data) {
+    charts[2].hideLoading();
+    charts[2].setOption({
+        title: {
+            text: bookNameTitles[2]
+        },
+        xAxis: {
+            data: data.topwords
+        },
+        series: [{
+            name: '词频',
+            data: data.topwordsnum
+        }]
+    });
+});
+$.get('/getSortedWords/' + booknames[3]).done(function(data) {
+    charts[3].hideLoading();
+    charts[3].setOption({
+        title: {
+            text: bookNameTitles[3]
+        },
+        xAxis: {
+            data: data.topwords
+        },
+        series: [{
+            name: '词频',
+            data: data.topwordsnum
+        }]
+    });
+});
+
+// for (var i; i < booknames.length; i++) { // console.log(booknames.length); // console.log(booknames[i]); // $.get( '/getSortedWords/' + booknames[i]).done(function(data) { // charts[i].hideLoading(); // charts[i].setOption({ // title: { // text: booknames[i] // }, // xAxis: { // data: data.topwords // }, // series: [{ // name: '词频', // data: data.topwordsnum // }] // }); // }); // }
+</script>
+{% endblock %}

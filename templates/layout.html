@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Famous Books</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/bootstrap.min.css') }}">
+    <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/bootstrap.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static',filename='js/echarts.min.js') }}"></script>
+    <style type="text/css">
+    body {
+    	text-align: center;
+        margin:auto 5em;
+        padding:auto 5em;
+        font-family: sans-serif;
+		background: #eee;
+    }
+    .chart {
+		width: 600px;
+		height:400px;
+		margin:2em 2em;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="page-header">
+        <h1>四大名著词频统计
+        <small>Famous Books Words Frequency Counts</small>
+        </h1>
+    </div>
+    <div>
+    <p class="text-left">
+        中国古典长篇小说四大名著，简称四大名著，是指《红楼梦》、《三国演义》、《水浒传》、《西游记》这四部巨著。 四大名著是中国文学史中的经典作品，是世界宝贵的文化遗产。此四部巨著在中国文学史上的地位是难分高低的，都有着极高的文学水平和艺术成就，细致的刻画和所蕴含的深刻思想都为历代读者所称道，其中的故事、场景、人物已经深深地影响了中国人的思想观念、价值取向。可谓中国文学史上的四座伟大丰碑。
+    </p>
+    </div>
+    {% block chart %} {% endblock %}
+</body>
+
+</html>
